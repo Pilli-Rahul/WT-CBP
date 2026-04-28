@@ -1,14 +1,13 @@
-import java.io.*;
+import java.io.IOException;
 import java.sql.*;
-import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
-            throws ServletException, IOException {
+            throws IOException {
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -26,14 +25,15 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                HttpSession session = req.getSession();
-                session.setAttribute("userId", rs.getInt("id"));
 
-                // ✅ redirect to courses page
+                HttpSession session = req.getSession();
+                session.setAttribute("user", username);
+                session.setAttribute("userId", rs.getInt("id")); // 🔥 IMPORTANT
+
                 res.sendRedirect("courses");
 
             } else {
-                res.getWriter().println("<h3>Invalid Credentials ❌</h3>");
+                res.sendRedirect("login.jsp?error=1");
             }
 
         } catch (Exception e) {

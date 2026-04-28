@@ -1,8 +1,5 @@
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-
-import javax.servlet.ServletException;
+import java.sql.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -10,19 +7,23 @@ import javax.servlet.http.*;
 public class EnrollServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
-            throws ServletException, IOException {
-
-        res.setContentType("text/html");
+            throws IOException {
 
         try {
-            int courseId = Integer.parseInt(req.getParameter("courseId"));
+            HttpSession session = req.getSession(false);
 
-            int userId = 1; // TEMP (we will replace with login later)
+            if (session == null || session.getAttribute("userId") == null) {
+                res.sendRedirect("login.jsp");
+                return;
+            }
+
+            int userId = (int) session.getAttribute("userId");
+            int courseId = Integer.parseInt(req.getParameter("courseId"));
 
             Connection con = DBConnection.getConnection();
 
             PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO enrollments (user_id, course_id) VALUES (?, ?)"
+                "INSERT INTO enrollments(user_id, course_id) VALUES(?,?)"
             );
 
             ps.setInt(1, userId);
@@ -31,10 +32,10 @@ public class EnrollServlet extends HttpServlet {
             ps.executeUpdate();
 
             res.getWriter().println("<h3>Enrolled Successfully ✅</h3>");
+            res.getWriter().println("<a href='courses'>Back to Courses</a>");
 
         } catch (Exception e) {
             e.printStackTrace();
-            res.getWriter().println("Error: " + e);
         }
     }
 }
