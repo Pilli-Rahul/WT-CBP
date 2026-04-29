@@ -14,24 +14,20 @@ public class LoginServlet extends HttpServlet {
 
         try {
             Connection con = DBConnection.getConnection();
-
             PreparedStatement ps = con.prepareStatement(
                 "SELECT * FROM users WHERE username=? AND password=?"
             );
-
             ps.setString(1, username);
             ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
                 HttpSession session = req.getSession();
                 session.setAttribute("user", username);
-                session.setAttribute("userId", rs.getInt("id")); // 🔥 IMPORTANT
-
+                session.setAttribute("userId", rs.getInt("id"));
+                session.setAttribute("role", rs.getString("role")); // ✅ store role
                 res.sendRedirect("courses");
-
             } else {
                 res.sendRedirect("login.jsp?error=1");
             }

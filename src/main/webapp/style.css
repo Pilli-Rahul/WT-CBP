@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0d1b2a;
+  --navy2:  #1b2e45;
+  --gold:   #c9a84c;
+  --gold2:  #e8c96a;
+  --light:  #f4f1eb;
+  --white:  #ffffff;
+  --muted:  #8a9bb0;
+  --danger: #e05c5c;
+  --success:#4caf87;
+  --radius: 14px;
+  --shadow: 0 8px 32px rgba(13,27,42,0.18);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--light);
+  min-height: 100vh;
+}
+
+/* ── AUTH PAGES (login, register, payment, add-course) ── */
+.auth-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(13,100,180,0.12) 0%, transparent 55%),
+    var(--navy);
+  padding: 24px;
+}
+
+.auth-card {
+  background: var(--navy2);
+  border: 1px solid rgba(201,168,76,0.18);
+  border-radius: 20px;
+  padding: 44px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,0.03);
+  animation: fadeUp 0.5s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(22px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.auth-logo .logo-icon {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 14px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.35);
+}
+.auth-logo h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.auth-logo p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 7px;
+}
+.form-group input {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.form-group input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+}
+.form-group input::placeholder { color: rgba(138,155,176,0.6); }
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: none;
+  border-radius: 10px;
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: transform 0.15s, box-shadow 0.15s;
+  margin-top: 6px;
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(201,168,76,0.4);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.auth-footer {
+  text-align: center;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.auth-footer a { color: var(--gold); text-decoration: none; font-weight: 500; }
+.auth-footer a:hover { color: var(--gold2); }
+
+.alert { border-radius: 8px; padding: 11px 14px; font-size: 0.88rem; margin-bottom: 18px; }
+.alert-error   { background: rgba(224,92,92,0.15); border: 1px solid rgba(224,92,92,0.3); color: #f08080; }
+.alert-success { background: rgba(76,175,135,0.15); border: 1px solid rgba(76,175,135,0.3); color: #6fcfaa; }
+.alert-warn    { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); color: var(--gold2); }
+
+.divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 20px 0; }
+
+/* course-info box inside payment */
+.course-info-box {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.course-info-box .ci-title { font-weight: 600; color: var(--white); font-size: 0.95rem; }
+.course-info-box .ci-price { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); }
+
+/* ── MAIN APP PAGES (courses, my-courses) ── */
+.app-layout { min-height: 100vh; background: var(--navy); }
+
+.topbar {
+  background: var(--navy2);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 0 40px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-brand {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.topbar-brand .brand-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.topbar-brand span {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--white);
+  letter-spacing: -0.3px;
+}
+
+.topbar-nav { display: flex; align-items: center; gap: 6px; }
+.nav-link {
+  padding: 7px 14px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-link:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+.nav-link.active { color: var(--gold); background: rgba(201,168,76,0.1); }
+.nav-link.logout {
+  color: var(--danger);
+  border: 1px solid rgba(224,92,92,0.25);
+  margin-left: 8px;
+}
+.nav-link.logout:hover { background: rgba(224,92,92,0.1); }
+
+.page-content { max-width: 1100px; margin: 0 auto; padding: 44px 32px; }
+
+.page-header { margin-bottom: 32px; }
+.page-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.page-header p { color: var(--muted); margin-top: 6px; font-size: 0.95rem; }
+
+/* Search bar */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.search-bar input {
+  flex: 1;
+  padding: 13px 18px;
+  background: var(--navy2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-bar input:focus { border-color: var(--gold); }
+.search-bar input::placeholder { color: var(--muted); }
+.search-bar button {
+  padding: 13px 24px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: none;
+  border-radius: 10px;
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.search-bar button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(201,168,76,0.35);
+}
+
+/* Course cards grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.course-card {
+  background: var(--navy2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeUp 0.4s ease both;
+}
+.course-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(201,168,76,0.3);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+}
+
+.course-card-id {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.course-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  line-height: 1.4;
+  flex: 1;
+}
+.course-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+.course-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gold);
+  font-family: 'Playfair Display', serif;
+}
+.btn-enroll {
+  padding: 9px 20px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: none;
+  border-radius: 8px;
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: inline-block;
+}
+.btn-enroll:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(201,168,76,0.4);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+.empty-state .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+.empty-state p { font-size: 1rem; }
+
+/* My courses table */
+.table-wrap {
+  background: var(--navy2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: rgba(201,168,76,0.08); border-bottom: 1px solid rgba(201,168,76,0.2); }
+th {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--gold);
+  font-weight: 600;
+}
+td {
+  padding: 16px 20px;
+  color: var(--light);
+  font-size: 0.93rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+tr:last-child td { border-bottom: none; }
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: rgba(255,255,255,0.03); }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.badge-paid    { background: rgba(76,175,135,0.15); color: #6fcfaa; border: 1px solid rgba(76,175,135,0.3); }
+.badge-pending { background: rgba(201,168,76,0.12); color: var(--gold2); border: 1px solid rgba(201,168,76,0.25); }
+
+/* Admin add course */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 640px) {
+  .topbar { padding: 0 20px; }
+  .page-content { padding: 28px 20px; }
+  .courses-grid { grid-template-columns: 1fr; }
+  .auth-card { padding: 32px 24px; }
+}

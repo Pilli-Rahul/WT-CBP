@@ -1,111 +1,68 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Register</title>
-
-    <style>
-        body {
-            font-family: Arial;
-            background: linear-gradient(to right, #43e97b, #38f9d7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .box {
-            background: white;
-            padding: 30px;
-            width: 320px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #43e97b;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #2ecc71;
-        }
-
-        a {
-            text-decoration: none;
-            color: #2ecc71;
-        }
-
-        .error {
-            color: red;
-            text-align: center;
-        }
-    </style>
-
-    <script>
-        function validate() {
-            let u = document.getElementById("username").value;
-            let p = document.getElementById("password").value;
-
-            if (u.length < 8) {
-                alert("Username must be at least 8 characters");
-                return false;
-            }
-
-            if (p.length < 5) {
-                alert("Password must be at least 5 characters");
-                return false;
-            }
-
-            return true;
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — LearnHub</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+<div class="auth-bg">
+  <div class="auth-card">
 
-<div class="box">
+    <div class="auth-logo">
+      <div class="logo-icon">✨</div>
+      <h1>Create Account</h1>
+      <p>Join thousands of learners today</p>
+    </div>
 
-    <h2 style="text-align:center;">Register</h2>
-
-    <!-- OPTIONAL ERROR (if you later add servlet validation) -->
     <%
-        String error = request.getParameter("error");
-        if (error != null) {
+      String error = request.getParameter("error");
+      if (error != null) {
     %>
-        <p class="error">Registration failed</p>
-    <%
-        }
-    %>
+      <div class="alert alert-error">⚠️ Registration failed. Please try again.</div>
+    <% } %>
 
-    <!-- ✅ REGISTER FORM -->
     <form action="register" method="post" onsubmit="return validate()">
-
-        <input type="text" id="username" name="username" placeholder="Username" required>
-
-        <input type="email" name="email" placeholder="Email" required>
-
-        <input type="password" id="password" name="password" placeholder="Password" required>
-
-        <button type="submit">Register</button>
-
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" name="username" placeholder="At least 8 characters" required>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" name="password" placeholder="At least 5 characters" required>
+      </div>
+      <button type="submit" class="btn-primary">Create Account →</button>
     </form>
 
-    <p style="text-align:center;">
-        Already have an account? <a href="login.jsp">Login</a>
-    </p>
+    <hr class="divider">
 
+    <div class="auth-footer">
+      Already have an account? <a href="login.jsp">Sign in</a>
+    </div>
+
+  </div>
 </div>
 
+<script>
+  function validate() {
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+    if (u.length < 8) {
+      alert("Username must be at least 8 characters");
+      return false;
+    }
+    if (p.length < 5) {
+      alert("Password must be at least 5 characters");
+      return false;
+    }
+    return true;
+  }
+</script>
 </body>
 </html>
